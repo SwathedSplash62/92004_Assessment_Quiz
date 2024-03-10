@@ -1,5 +1,6 @@
 import math
 import random
+from turtle import clear
 
 
 # This checks for the answers to be actual valid integers
@@ -87,6 +88,8 @@ Type <quit> to end the game at anytime.
 # Main routine goes here
 
 # what the game is supposed to be
+answers_width = []
+answers_length = []
 mode = "regular"
 rounds_played = 0
 feedback = ""
@@ -117,13 +120,27 @@ while rounds_played < num_rounds:
         rounds_heading = f"\n🐂🐂🐂 Round {rounds_played + 1} (Infinite Mode) 🐂🐂🐂"
     else:
         rounds_heading = f"\n🍙🍙🍙 Round {rounds_played + 1} of {num_rounds} 🍙🍙🍙"
-    
+
     width = random.choice(value_list)
     length = random.choice(value_list)
-    if guess f"{width} == {length}:
+    if length == width:
         shape = "square"
+    else:
+        shape = "rectangle"
 
-        question = num_checker(f"The area of a {shape}: ", )
+    question = num_checker(f"What is the area of this {shape} if the width is {width}m and length is"
+                           f" {length}m? ")
+    answer = width * length
+    print(answer)
+
+    if question == answer:
+        print("Congrats you are right")
+    else:
+        print("You are wrong")
+        answers_width.clear()
+        answers_length.clear()
+
+
 
 
 
