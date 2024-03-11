@@ -4,30 +4,37 @@ from turtle import clear
 
 
 # This checks for the answers to be actual valid integers
-def num_checker(question):
+def num_checker(question, exit_code=None):
     valid = False
     while not valid:
         error = "Please enter an integer that is 1 or more"
 
-        to_check = input(question)
+        while True:
+            to_check = input(question).lower()
 
-        if to_check == "":
-            return ""
+            if to_check == "":
+                return ""
 
-        try:
+            try:
 
-            # ask user to enter a number
-            response = int(to_check)
+                if to_check == exit_code:
+                    return to_check
 
-            # checks number is more than one
-            if response < 1:
+                # ask user to enter a number
+                response = int(to_check)
+
+                # checks number is more than one
+                if response < 1:
+                    print(error)
+
+                elif to_check == "":
+                    return ""
+                # Outputs error if input is invalid
+                else:
+                    return response
+
+            except ValueError:
                 print(error)
-            # Outputs error if input is invalid
-            else:
-                return response
-
-        except ValueError:
-            print(error)
 
 
 # used for simple commands - yes_no - and is easy to implement
@@ -71,14 +78,11 @@ def instructions():
     print('''
 To begin, choose the number of rounds (or press <enter> for infinite mode).
 
-You will then chose a lower and higher number (inclusive) that will contain your secret number 
+You will receive questions about the area of different shapes, the units will be automatically accounted for; e.g you 
+will not have to enter them 
 
-You will then try to guess the number while the computer will give you hints for each guess
-
-You will receive statistics on your guesses used and will be able to see your game history at the end of the game 
-
-Type <quit> to end the game at anytime.
-
+Type: "quit" to exit the game at anytime 
+ 
 🐥🐥🐥Good Luck🐥🐥🐥
 ''')
     print()
@@ -88,8 +92,8 @@ Type <quit> to end the game at anytime.
 # Main routine goes here
 
 # what the game is supposed to be
-answers_width = []
-answers_length = []
+correct_answers = []
+total_questions = []
 mode = "regular"
 rounds_played = 0
 feedback = ""
@@ -115,11 +119,17 @@ if num_rounds == "":
 
 while rounds_played < num_rounds:
 
+    # creates infinite
+    if mode == "infinite":
+        num_rounds += 1
+
     # rounds based on mode
     if mode == "infinite":
         rounds_heading = f"\n🐂🐂🐂 Round {rounds_played + 1} (Infinite Mode) 🐂🐂🐂"
     else:
         rounds_heading = f"\n🍙🍙🍙 Round {rounds_played + 1} of {num_rounds} 🍙🍙🍙"
+
+    print(rounds_heading)
 
     width = random.choice(value_list)
     length = random.choice(value_list)
@@ -129,18 +139,45 @@ while rounds_played < num_rounds:
         shape = "rectangle"
 
     question = num_checker(f"What is the area of this {shape} if the width is {width}m and length is"
-                           f" {length}m? ")
+                           f" {length}m? ", exit_code="quit")
+
+    if question == "quit":
+        end_game = "yes"
+        break
     answer = width * length
-    print(answer)
+    print(f"You chose {question}m")
+    print(f"The answer was {answer}m")
 
     if question == answer:
-        print("Congrats you are right")
+        result = print("Congrats you are right")
+        rounds_played += 1
+        correct_answers.append(result)
     else:
-        print("You are wrong")
-        answers_width.clear()
-        answers_length.clear()
+        result = print("You are wrong")
+        rounds_played += 1
+        total_questions.append(result)
 
 
+if rounds_played > 0:
 
+    # Behold, stats
 
+    # Output stats
+    print("📈📈📈 Game Statistics 📈📈📈")
+    print(
+        f"Best: {correct_answers} out of {total_questions}")
+    print()
 
+    see_history = string_checker("Do you want to see your game history? ", yes_no_list)
+    if see_history == "yes":
+        for item in game_history:
+            print(item)
+
+else:
+    "..."
+
+# final statement before game end
+
+print("   Thank you for playing")
+statement_generator("Super duper hard math test", "🤖💎")
+print()
