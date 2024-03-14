@@ -1,6 +1,4 @@
-import math
 import random
-from turtle import clear
 
 
 # This checks for the answers to be actual valid integers
@@ -17,8 +15,8 @@ def num_checker(question, exit_code=None):
 
             try:
 
-                if to_check == exit_code:
-                    return to_check
+                if to_check == "quit":
+                    return "quit"
 
                 # ask user to enter a number
                 response = int(to_check)
@@ -81,12 +79,21 @@ To begin, choose the number of rounds (or press <enter> for infinite mode).
 You will receive questions about the area of different shapes, the units will be automatically accounted for; e.g you 
 will not have to enter them 
 
+You may press <enter> to skip a question 
+
 Type: "quit" to exit the game at anytime 
  
 🐥🐥🐥Good Luck🐥🐥🐥
 ''')
     print()
     return ""
+
+
+def sumOfList(list, size):
+    if size == 0:
+        return 0
+    else:
+        return list[size - 1] + sumOfList(list, size - 1)
 
 
 # Main routine goes here
@@ -102,7 +109,7 @@ guess = 0
 yes_no_list = ['yes', 'no']
 game_history = []
 all_scores = []
-value_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, ]
+value_list = [random.randint(1, 20)]
 # Title
 statement_generator("Super duper hard math test", "🤖💎")
 # instructions
@@ -142,36 +149,50 @@ while rounds_played < num_rounds:
                            f" {length}m? ", exit_code="quit")
 
     if question == "quit":
-        end_game = "yes"
         break
     answer = width * length
-    print(f"You chose {question}m")
-    print(f"The answer was {answer}m")
+    if question == "":
+        print("You have skipped the question")
+    else:
+        print(f"You chose {question}m")
+    the_right_choice = f"The answer was {answer}m"
+    print(the_right_choice)
+    game_history.append(the_right_choice)
 
     if question == answer:
-        result = print("Congrats you are right")
+        result = "Congrats you are right"
+        print(result)
         rounds_played += 1
-        correct_answers.append(result)
+        correct_answers.append(+1)
+        total_questions.append(+1)
+        game_history.append(result)
     else:
-        result = print("You are wrong")
+        result = "You are wrong"
+        print(result)
         rounds_played += 1
-        total_questions.append(result)
-
+        total_questions.append(+1)
+        game_history.append(result)
 
 if rounds_played > 0:
 
-    # Behold, stats
+    # stats of the results including the average and total as well as game history
 
     # Output stats
     print("📈📈📈 Game Statistics 📈📈📈")
+
+    total = sumOfList(total_questions, len(total_questions))
+    correct_total = sumOfList(correct_answers, len(correct_answers))
+
     print(
-        f"Best: {correct_answers} out of {total_questions}")
+        f"Final Score: {correct_total} out of {total}"
+        f" Average: {correct_total / total:.2f}%")
     print()
 
     see_history = string_checker("Do you want to see your game history? ", yes_no_list)
     if see_history == "yes":
         for item in game_history:
             print(item)
+
 
 else:
     "..."
