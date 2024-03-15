@@ -109,7 +109,6 @@ guess = 0
 yes_no_list = ['yes', 'no']
 game_history = []
 all_scores = []
-value_list = [random.randint(1, 20)]
 # Title
 statement_generator("Super duper hard math test", "🤖💎")
 # instructions
@@ -138,8 +137,8 @@ while rounds_played < num_rounds:
 
     print(rounds_heading)
 
-    width = random.choice(value_list)
-    length = random.choice(value_list)
+    width = random.randint(1, 20)
+    length = random.randint(1, 20)
     if length == width:
         shape = "square"
     else:
