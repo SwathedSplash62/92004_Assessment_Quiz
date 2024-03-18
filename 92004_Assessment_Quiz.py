@@ -2,13 +2,13 @@ import random
 
 
 # This checks for the answers to be actual valid integers
-def num_checker(question, exit_code=None):
+def num_checker(question_num):
     valid = False
     while not valid:
         error = "Please enter an integer that is 1 or more"
 
         while True:
-            to_check = input(question).lower()
+            to_check = input(question_num).lower()
 
             if to_check == "":
                 return ""
@@ -36,19 +36,19 @@ def num_checker(question, exit_code=None):
 
 
 # used for simple commands - yes_no - and is easy to implement
-def string_checker(question, valid_ans):
+def string_checker(question_string, valid_ans):
     error = f"Please enter a valid option from the following list: {valid_ans}"
 
     while True:
 
-        user_response = input(question).lower()
+        user_response = input(question_string).lower()
 
-        for item in valid_ans:
-            if item == user_response:
-                return item
+        for item_string in valid_ans:
+            if item_string == user_response:
+                return item_string
 
-            elif user_response == item[0]:
-                return item
+            elif user_response == item_string[0]:
+                return item_string
 
         # print error when error
         print(error)
@@ -89,11 +89,11 @@ Type: "quit" to exit the game at anytime
     return ""
 
 
-def sumOfList(list, size):
+def sumOfList(list_sum, size):
     if size == 0:
         return 0
     else:
-        return list[size - 1] + sumOfList(list, size - 1)
+        return list_sum[size - 1] + sumOfList(list, size - 1)
 
 
 # Main routine goes here
@@ -145,7 +145,7 @@ while rounds_played < num_rounds:
         shape = "rectangle"
 
     question = num_checker(f"What is the area of this {shape} if the width is {width}m and length is"
-                           f" {length}m? ", exit_code="quit")
+                           f" {length}m? ")
 
     if question == "quit":
         break
