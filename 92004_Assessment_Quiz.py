@@ -99,8 +99,8 @@ def sumOfList(list_sum, size):
 # Main routine goes here
 
 # what the game is supposed to be
-correct_answers = []
-total_questions = []
+correct_answers = 0
+total_questions = 0
 mode = "regular"
 rounds_played = 0
 feedback = ""
@@ -117,7 +117,7 @@ if want_instructions == "yes":
     instructions()
 
 # how many questions they would like to be asked of them?
-num_rounds = num_checker("How many rounds would you like? Push <enter> for 🎊🎊infinite mode🎊🎊: ")
+num_rounds = num_checker("How many rounds would you like? Push <enter> for ♾️infinite mode♾️: ")
 
 if num_rounds == "":
     mode = "infinite"
@@ -131,9 +131,9 @@ while rounds_played < num_rounds:
 
     # rounds based on mode
     if mode == "infinite":
-        rounds_heading = f"\n🐂🐂🐂 Round {rounds_played + 1} (Infinite Mode) 🐂🐂🐂"
+        rounds_heading = f"\n♾️♾️♾️ Round {rounds_played + 1} (Infinite Mode) ♾️♾️♾️"
     else:
-        rounds_heading = f"\n🍙🍙🍙 Round {rounds_played + 1} of {num_rounds} 🍙🍙🍙"
+        rounds_heading = f"\n🎉🎉🎉 Round {rounds_played + 1} of {num_rounds} 🎉🎉🎉"
 
     print(rounds_heading)
 
@@ -162,14 +162,14 @@ while rounds_played < num_rounds:
         result = "Congrats you are right"
         print(result)
         rounds_played += 1
-        correct_answers.append(+1)
-        total_questions.append(+1)
+        correct_answers += 1
+        total_questions += 1
         game_history.append(result)
     else:
         result = "You are wrong"
         print(result)
         rounds_played += 1
-        total_questions.append(+1)
+        total_questions += 1
         game_history.append(result)
 
 if rounds_played > 0:
@@ -179,8 +179,8 @@ if rounds_played > 0:
     # Output stats
     print("📈📈📈 Game Statistics 📈📈📈")
 
-    total = sumOfList(total_questions, len(total_questions))
-    correct_total = sumOfList(correct_answers, len(correct_answers))
+    total = total_questions
+    correct_total = correct_answers
 
     print(
         f"Final Score: {correct_total} out of {total}"
