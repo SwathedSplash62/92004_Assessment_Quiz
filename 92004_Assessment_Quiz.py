@@ -169,72 +169,91 @@ while questions_asked < num_questions:
     else:
         shape = "rectangle"
 
-    if question_type == 1:
-        question_area = num_checker(f"What is the area of this {shape} if the width is {width}m and length is"
-                                    f" {length}m^2? ")
-        while question_area == "quit" and questions_asked < 1:
-            print("Cannot leave quiz on question 1")
-            question_area = num_checker(f"What is the area of this {shape} if the width is {width}m and length is"
-                                        f" {length}m^2? ")
-        answer = width * length
-
-        if question_area == "":
-            print("You have skipped the question")
-        else:
-            print(f"You chose {question_area}m")
-        the_right_choice = f"{length} x {width} which is {answer}m^2. You were correct"
-        quiz_history.append(the_right_choice)
-
-        if question_area == answer:
-            result = "Congrats you are right"
-            print(result)
-            questions_asked += 1
-            correct_answers += 1
-            total_questions += 1
-            quiz_history.append(result)
-        else:
-            public_result = f"Sorry, you are incorrect. If the length is {length} and the width is {width}" \
-                            f" , the area is " \
-                            f"{length} x {width} which is {answer}m^2"
-            print(public_result)
-            result = f"{length} x {width} = {answer}m. However you said {question_area} "
-            questions_asked += 1
-            total_questions += 1
-            quiz_history.append(result)
-
     if question_type == 2:
         question_perimeter = num_checker(
             f"What is the perimeter of this {shape} if the width is {width}m and length is"
             f" {length}m? ")
         while question_perimeter == "quit" and questions_asked < 1:
             print("Cannot leave quiz on question 1")
-            question_area = num_checker(f"What is the area of this {shape} if the width is {width}m and length is"
-                                        f" {length}m? ")
-            answer = (width * 2) + (length * 2)
+            question_perimeter = num_checker(f"What is the area of this {shape} if the width is {width}m and length is"
+                                             f" {length}m? ")
 
-            if question_perimeter == "":
-                print("You have skipped the question")
-            else:
-                print(f"You chose {question_perimeter}m")
-            the_right_choice = f"2({length}) + 2({width}) which is {answer}m. You were correct"
+        if question_perimeter == "quit":
+            end_quiz = "True"
+            break
+        answer = (width * 2) + (length * 2)
+
+        if question_perimeter == "":
+            print("You have skipped the question")
+        else:
+            print(f"You chose {question_perimeter}m")
+
+        if question_perimeter == answer:
+            result = "Congrats you are right 👌✅👍"
+            print(result)
+            questions_asked += 1
+            correct_answers += 1
+            total_questions += 1
+            the_right_choice = f"2({length}) + 2({width}) which is {answer}m. You were correct ✅"
             quiz_history.append(the_right_choice)
 
-            if question_perimeter == answer:
-                result = "Congrats you are right"
-                print(result)
-                questions_asked += 1
-                correct_answers += 1
-                total_questions += 1
-                quiz_history.append(result)
-            else:
-                public_result = f"Sorry, you are incorrect. If the length is {length} and the width is {width}" \
-                                f" , the area is " \
-                                f"2({length}) + 2({width}) which is {answer}"
-                print(public_result)
-                result = f"2({length}) + 2({width})m. However you said {question_perimeter} "
-                questions_asked += 1
-                total_questions += 1
-                quiz_history.append(result)
+        elif question_perimeter == "":
+            result = f"2({length}) + 2({width})m. However you skipped the question ❌"
+            questions_asked += 1
+            total_questions += 1
+            quiz_history.append(result)
+
+        if not question_perimeter == answer and not "":
+            public_result = f"❌Sorry, you are incorrect❌. If the length is {length} and the width is {width}" \
+                            f" , the perimeter is " \
+                            f"2({length}) + 2({width}) which is {answer}"
+            print(public_result)
+            result_skip = f"2({length}) + 2({width})m. However you said {question_perimeter} ❌"
+            questions_asked += 1
+            total_questions += 1
+            quiz_history.append(result_skip)
+
+    if question_type == 1:
+        question_area = num_checker(f"What is the area of this {shape} if the width is {width}m and length is"
+                                    f" {length}m? ")
+        while question_area == "quit" and questions_asked < 1:
+            print("Cannot leave quiz on question 1")
+            question_area = num_checker(f"What is the area of this {shape} if the width is {width}m and length is"
+                                        f" {length}? ")
+        if question_area == "quit":
+            end_quiz = "True"
+            break
+        answer = width * length
+
+        if question_area == "":
+            print("You have skipped the question")
+        else:
+            print(f"You chose {question_area}m")
+
+        if question_area == answer:
+            result = "Congrats you are right 👌✅👍"
+            print(result)
+            the_right_choice = f"{length} x {width} which is {answer}m^2. You were correct ✅"
+            quiz_history.append(the_right_choice)
+            questions_asked += 1
+            correct_answers += 1
+            total_questions += 1
+
+        elif question_area == "":
+            result_skip = f"{length} x {width} = {answer}m. However you skipped the question ❌"
+            questions_asked += 1
+            total_questions += 1
+            quiz_history.append(result_skip)
+
+        if not question_area == answer and not "":
+            public_result = f"❌Sorry, you are incorrect❌. If the length is {length} and the width is {width}" \
+                            f" , the area is " \
+                            f"{length} x {width} which is {answer}m^2"
+            print(public_result)
+            result = f"{length} x {width} = {answer}m. However you said {question_area} ❌"
+            questions_asked += 1
+            total_questions += 1
+            quiz_history.append(result)
 
 if num_questions > 1:
 
