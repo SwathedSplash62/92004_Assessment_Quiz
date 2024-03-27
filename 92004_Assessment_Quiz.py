@@ -111,7 +111,7 @@ will not have to enter them
 
 You may press <enter> to skip a question but it will be marked as wrong 
 
-Type: "quit" to exit the quiz at anytime 
+Type: "quit" to exit the quiz at anytime but you cannot exit the quiz on first question
  
 🐥🐥🐥Good Luck🐥🐥🐥
 ''')
