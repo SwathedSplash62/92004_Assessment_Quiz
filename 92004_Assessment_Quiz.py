@@ -154,9 +154,9 @@ while questions_asked < num_questions:
         break
     # type of questioning based on mode
     if mode == "infinite":
-        question_heading = f"\n♾️♾️♾️ Round {questions_asked + 1} (Infinite Mode) ♾️♾️♾️"
+        question_heading = f"\n♾️♾️♾️ Round {questions_asked + 1 } (Infinite Mode) ♾️♾️♾️"
     else:
-        question_heading = f"\n🎉🎉🎉 Round {questions_asked + 1} of {num_questions} 🎉🎉🎉"
+        question_heading = f"\n🎉🎉🎉 Round {questions_asked + 1 } of {num_questions} 🎉🎉🎉"
 
     print(question_heading)
 
@@ -169,7 +169,7 @@ while questions_asked < num_questions:
     else:
         shape = "rectangle"
 
-    if question_type == 2:
+    if question_type == 1:
         question_perimeter = num_checker(
             f"What is the perimeter of this {shape} if the width is {width}m and length is"
             f" {length}m? ")
@@ -197,23 +197,24 @@ while questions_asked < num_questions:
             the_right_choice = f"2({length}) + 2({width}) which is {answer}m. You were correct ✅"
             quiz_history.append(the_right_choice)
 
-        elif question_perimeter == "":
-            result = f"2({length}) + 2({width})m. However you skipped the question ❌"
+        if question_perimeter == "":
+            skip_answer = (width * 2) + (length * 2)
+            result = f"2({length}) + 2({width})m = {skip_answer}. However you skipped the question ❌"
             questions_asked += 1
             total_questions += 1
             quiz_history.append(result)
 
-        if not question_perimeter == answer and not "":
+        if not question_perimeter == answer and not question_perimeter == "":
             public_result = f"❌Sorry, you are incorrect❌. If the length is {length} and the width is {width}" \
                             f" , the perimeter is " \
                             f"2({length}) + 2({width}) which is {answer}"
             print(public_result)
-            result_skip = f"2({length}) + 2({width})m. However you said {question_perimeter} ❌"
+            result = f"2({length}) + 2({width})m. However you said {question_perimeter} ❌"
             questions_asked += 1
             total_questions += 1
-            quiz_history.append(result_skip)
+            quiz_history.append(result)
 
-    if question_type == 1:
+    if question_type == 2:
         question_area = num_checker(f"What is the area of this {shape} if the width is {width}m and length is"
                                     f" {length}m? ")
         while question_area == "quit" and questions_asked < 1:
@@ -239,13 +240,14 @@ while questions_asked < num_questions:
             correct_answers += 1
             total_questions += 1
 
-        elif question_area == "":
-            result_skip = f"{length} x {width} = {answer}m. However you skipped the question ❌"
+        if question_area == "":
+            skip_answer = width * length
+            result_skip = f"{length} x {width} = {skip_answer}m. However you skipped the question ❌"
             questions_asked += 1
             total_questions += 1
             quiz_history.append(result_skip)
 
-        if not question_area == answer and not "":
+        if not question_area == answer and not question_area == "":
             public_result = f"❌Sorry, you are incorrect❌. If the length is {length} and the width is {width}" \
                             f" , the area is " \
                             f"{length} x {width} which is {answer}m^2"
