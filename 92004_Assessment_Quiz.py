@@ -154,9 +154,9 @@ while questions_asked < num_questions:
         break
     # type of questioning based on mode
     if mode == "infinite":
-        question_heading = f"\n♾️♾️♾️ Round {questions_asked + 1 } (Infinite Mode) ♾️♾️♾️"
+        question_heading = f"\n♾️♾️♾️ Question {questions_asked + 1 } (Infinite Mode) ♾️♾️♾️"
     else:
-        question_heading = f"\n🎉🎉🎉 Round {questions_asked + 1 } of {num_questions} 🎉🎉🎉"
+        question_heading = f"\n🎉🎉🎉 Question {questions_asked + 1 } of {num_questions} 🎉🎉🎉"
 
     print(question_heading)
 
